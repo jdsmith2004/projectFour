@@ -1,0 +1,27 @@
+{% load static %}
+
+<head>
+    <title>Weather App - NWS Observations</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'weather/style.css' %}">
+</head>
+
+<body>
+
+<h1>NWS Observations - {{site}}</h1>
+
+<table>
+    <tr>
+        <th>Date/Time</th>
+        <th>Temp</th>
+        <th>Sky</th>
+    </th>
+    {% for obs in all_obs %}
+        <tr>
+            <td>{{obs.time}}</td>
+            <td>{{obs.temp|floatformat:2}} Deg F</td>
+            <td>{{obs.sky}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>

@@ -1,0 +1,40 @@
+{% load static %}
+
+<head>
+    <title>Weather App - My Observations</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'weather/style.css' %}">
+</head>
+
+<body>
+
+<h1>My Observations</h1>
+
+<table>
+    <tr>
+        <th>Date/Time</th>
+        <th>Temp</th>
+        <th>Sky</th>
+    </th>
+    {% for obs in all_obs %}
+        <tr>
+            <td>{{obs.time}}</td>
+            <td>{{obs.temp|floatformat:2}} Deg F</td>
+            <td>{{obs.sky}}</td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td><b>Avg Temp</b></td>
+        <td><b>{{avg_temp|floatformat:2}} Deg F</b></td>
+        <td><b></b></td>
+    </tr>
+</table>
+
+<br>
+<form action="{% url 'my_weather' %}" method="POST">
+    {% csrf_token %}
+    Temp (Deg F): <input type="number" name="obsTemp"><br>
+    Sky: <input type="text" name="obsSky"><br>
+    <input type="submit" name="add_new_obs" value="Add New Observation">
+</form>
+
+</body>
